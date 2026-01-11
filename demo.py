@@ -10,7 +10,6 @@ def main():
     # Prędkość animacji
     SPEED = 0.05
     
-    # Twój nowy ASCII Art "KOMPOT" w stylu Block Elements
     KOMPOT_ART = [
         "▗▖ ▗▖ ▄▄▄  ▄▄▄▄  ▄▄▄▄   ▄▄▄▗▄▄▄▖",
         "▐▌▗▞▘█   █ █ █ █ █   █ █   █ █  ",
@@ -22,12 +21,12 @@ def main():
     kompot_width = max(len(line) for line in KOMPOT_ART)
 
     try:
-        # Ukryj kursor (ANSI escape sequence) - standard w narzędziach CLI
+        # Ukryj kursor
         sys.stdout.write("\033[?25l")
         
         t = 0
         while True:
-            # Pobierz aktualny rozmiar terminala (responsywność)
+            # Pobierz aktualny rozmiar terminala 
             try:
                 cols, rows = shutil.get_terminal_size()
             except:
@@ -38,7 +37,7 @@ def main():
             start_x = (cols // 2) - (kompot_width // 2)
 
             frame = []
-            frame.append("\033[H") # Powrót kursora na górę ekranu (Home)
+            frame.append("\033[H") # Powrót kursora na górę ekranu 
             
             for y in range(rows - 1):
                 line = ""
@@ -91,7 +90,7 @@ def main():
     except KeyboardInterrupt:
         # Przywrócenie ustawień terminala po Ctrl+C
         sys.stdout.write("\033[?25h\033[0m\033[2J\033[H")
-        print("Dzięki za oglądanie demka! 🐧")
+        print("Dzięki za oglądanie demka!")
 
 if __name__ == "__main__":
     main()
