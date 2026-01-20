@@ -84,13 +84,17 @@ def main():
             for y in range(rows):
                 line = ""
                 
-                # --- SCREEN GLITCH: LINE TEARING ---
-                # Przesunięcie linii w pionie (efekt V-Sync)
+                # --- SCREEN GLITCH: CENTER TEARING (V-Sync Failure) ---
                 render_y = y
                 if screen_glitch_frames > 0:
-                    # Czasami przesuwamy całą sekcję
-                    if random.random() < 0.4:
-                        render_y += sg_offset_y
+                    # Efekt występuje tylko w środkowym pasie ekranu (middle 1/3)
+                    center_band_start = rows // 3
+                    center_band_end = (rows // 3) * 2
+                    
+                    if center_band_start <= y < center_band_end:
+                         # Mocniejsze rwanie w tym obszarze
+                         if random.random() < 0.7:
+                            render_y += sg_offset_y
                         
                 # --- SCANLINES ---
                 is_scanline = (y % 2 == 1)
